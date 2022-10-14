@@ -5,6 +5,9 @@
 
 # -------------------- Utility Methods --------------------
 # Check for binaries
+
+# Note: Rename all csplit to gcsplit if you on mac
+
 function checkEnvironment(){
     type csplit >/dev/null 2>&1 || { echo "Install 'csplit' first (e.g. via 'brew install coreutils')." >&2 && exit 1 ; }
     type mdbook >/dev/null 2>&1 || { echo "Install 'mdbook' first (e.g. via 'cargo install mdbook')." >&2 && exit 1 ; }
@@ -18,7 +21,8 @@ function cleanupBeforeStarting(){
 
 # Splits the Readme.md file based on the header in markdown and creates chapters
 # Note:
-#   Get csplit via homebrew on mac: brew install coreutils
+#   Get gcsplit via homebrew on mac: brew install coreutils
+#   Get csplit via official linux repo: sudo pacman -S coreutils
 function splitIntoChapters(){
     csplit --prefix='Chapter_' --suffix-format='%d.md' --elide-empty-files README.md '/^## /' '{*}' -q
 }
